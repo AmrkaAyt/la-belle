@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог парфюмерии</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #764ba2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-icon {
+            position: relative;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-brand {
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .product-description {
+            color: #777;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .product-options {
+            margin-bottom: 20px;
+        }
+
+        .option-type {
+            margin-bottom: 15px;
+        }
+
+        .option-label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .volume-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .volume-option {
+            padding: 8px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .volume-option:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+
+        .volume-option.selected {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .volume-price {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+
+        .sets-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .set-option {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .set-option:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+
+        .set-option.selected {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .set-description {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .set-price {
+            display: block;
+            font-weight: bold;
+        }
+
+        .current-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-to-cart:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-to-cart:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-details {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .remove-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .total {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .total-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .share-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .sets-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">✨ Parfume Boutique</div>
+            <button class="cart-icon" onclick="openCart()">
+                🛒 Корзина
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </header>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Товары будут добавлены через JavaScript -->
+        </div>
+    </div>
+
+    <!-- Модальное окно корзины -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Ваша корзина</h2>
+                <button class="close" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+                <div class="total">
+                    <div class="total-price">Итого: <span id="totalPrice">0</span> ₽</div>
+                    <button class="share-btn" onclick="shareCart()">📱 Поделиться с продавцом</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные товаров с объемами и сетами
+        const products = [
+            {
+                id: 1,
+                name: "Chanel No. 5",
+                brand: "Chanel",
+                description: "Легендарный аромат с нотами иланг-иланга, розы и сандала",
+                emoji: "🌹",
+                volumes: {
+                    2: 850,
+                    5: 1800,
+                    10: 3200,
+                    15: 4500,
+                    20: 5800
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 2400 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 3200 },
+                    "5x2ml": { description: "5 флаконов по 2мл", price: 3800 }
+                }
+            },
+            {
+                id: 2,
+                name: "Dior Sauvage",
+                brand: "Christian Dior",
+                description: "Свежий мужской аромат с нотами бергамота и перца",
+                emoji: "🌿",
+                volumes: {
+                    2: 750,
+                    5: 1600,
+                    10: 2800,
+                    15: 4000,
+                    20: 5200
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 2100 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 2900 },
+                    "4x2ml": { description: "4 флакона по 2мл", price: 2700 }
+                }
+            },
+            {
+                id: 3,
+                name: "Tom Ford Black Orchid",
+                brand: "Tom Ford",
+                description: "Роскошный унисекс аромат с черной орхидеей и ванилью",
+                emoji: "🖤",
+                volumes: {
+                    2: 950,
+                    5: 2100,
+                    10: 3800,
+                    15: 5500,
+                    20: 7200
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 2700 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 3800 },
+                    "6x2ml": { description: "6 флаконов по 2мл", price: 5200 }
+                }
+            },
+            {
+                id: 4,
+                name: "Versace Bright Crystal",
+                brand: "Versace",
+                description: "Сияющий женский аромат с нотами граната и пиона",
+                emoji: "💎",
+                volumes: {
+                    2: 550,
+                    5: 1200,
+                    10: 2100,
+                    15: 3000,
+                    20: 3800
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 1500 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 2200 },
+                    "4x2ml": { description: "4 флакона по 2мл", price: 2000 }
+                }
+            },
+            {
+                id: 5,
+                name: "Giorgio Armani Acqua di Gio",
+                brand: "Giorgio Armani",
+                description: "Свежий морской аромат с нотами бергамота и розмарина",
+                emoji: "🌊",
+                volumes: {
+                    2: 680,
+                    5: 1450,
+                    10: 2600,
+                    15: 3700,
+                    20: 4800
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 1900 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 2650 },
+                    "5x2ml": { description: "5 флаконов по 2мл", price: 3100 }
+                }
+            },
+            {
+                id: 6,
+                name: "Yves Saint Laurent Black Opium",
+                brand: "Yves Saint Laurent",
+                description: "Соблазнительный аромат с кофе, ванилью и жасмином",
+                emoji: "☕",
+                volumes: {
+                    2: 800,
+                    5: 1750,
+                    10: 3100,
+                    15: 4400,
+                    20: 5700
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 2250 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 3200 },
+                    "4x2ml": { description: "4 флакона по 2мл", price: 2900 }
+                }
+            },
+            {
+                id: 7,
+                name: "Dolce & Gabbana Light Blue",
+                brand: "Dolce & Gabbana",
+                description: "Средиземноморский аромат с лимоном и зеленым яблоком",
+                emoji: "🍋",
+                volumes: {
+                    2: 620,
+                    5: 1350,
+                    10: 2400,
+                    15: 3400,
+                    20: 4400
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 1750 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 2450 },
+                    "5x2ml": { description: "5 флаконов по 2мл", price: 2800 }
+                }
+            },
+            {
+                id: 8,
+                name: "Hermès Terre d'Hermès",
+                brand: "Hermès",
+                description: "Земляной мужской аромат с грейпфрутом и ветивером",
+                emoji: "🌍",
+                volumes: {
+                    2: 900,
+                    5: 1950,
+                    10: 3500,
+                    15: 5000,
+                    20: 6500
+                },
+                sets: {
+                    "3x2ml": { description: "3 флакона по 2мл", price: 2550 },
+                    "2x5ml": { description: "2 флакона по 5мл", price: 3600 },
+                    "6x2ml": { description: "6 флаконов по 2мл", price: 4900 }
+                }
+            }
+        ];
+
+        let cart = [];
+        let selectedOptions = {};
+
+        // Отображение товаров
+        function displayProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                // Инициализируем выбранные опции для каждого товара
+                if (!selectedOptions[product.id]) {
+                    selectedOptions[product.id] = {
+                        type: 'volume', // 'volume' или 'set'
+                        volume: Object.keys(product.volumes)[0],
+                        set: Object.keys(product.sets)[0]
+                    };
+                }
+
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+
+                // Создаем опции объемов
+                let volumeOptionsHtml = '';
+                Object.entries(product.volumes).forEach(([volume, price]) => {
+                    const isSelected = selectedOptions[product.id].type === 'volume' &&
+                                     selectedOptions[product.id].volume === volume;
+                    volumeOptionsHtml += `
+                        <div class="volume-option ${isSelected ? 'selected' : ''}"
+                             onclick="selectOption(${product.id}, 'volume', '${volume}')">
+                            ${volume}мл
+                            <span class="volume-price">${price.toLocaleString()}₽</span>
+                        </div>
+                    `;
+                });
+
+                // Создаем опции сетов
+                let setOptionsHtml = '';
+                Object.entries(product.sets).forEach(([setKey, setData]) => {
+                    const isSelected = selectedOptions[product.id].type === 'set' &&
+                                     selectedOptions[product.id].set === setKey;
+                    setOptionsHtml += `
+                        <div class="set-option ${isSelected ? 'selected' : ''}"
+                             onclick="selectOption(${product.id}, 'set', '${setKey}')">
+                            <span class="set-description">${setData.description}</span>
+                            <span class="set-price">${setData.price.toLocaleString()}₽</span>
+                        </div>
+                    `;
+                });
+
+                // Определяем текущую цену
+                const currentPrice = getCurrentPrice(product.id);
+
+                productCard.innerHTML = `
+                    <div class="product-image">${product.emoji}</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-brand">${product.brand}</div>
+                    <div class="product-description">${product.description}</div>
+
+                    <div class="product-options">
+                        <div class="option-type">
+                            <label class="option-label">Выберите объем:</label>
+                            <div class="volume-options">
+                                ${volumeOptionsHtml}
+                            </div>
+                        </div>
+
+                        <div class="option-type">
+                            <label class="option-label">Или выберите сет:</label>
+                            <div class="sets-options">
+                                ${setOptionsHtml}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="current-price">${currentPrice.toLocaleString()} ₽</div>
+                    <button class="add-to-cart" onclick="addToCart(${product.id})">
+                        Добавить в корзину
+                    </button>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        // Получить текущую цену товара
+        function getCurrentPrice(productId) {
+            const product = products.find(p => p.id === productId);
+            const options = selectedOptions[productId];
+
+            if (options.type === 'volume') {
+                return product.volumes[options.volume];
+            } else {
+                return product.sets[options.set].price;
+            }
+        }
+
+        // Выбор опции (объем или сет)
+        function selectOption(productId, type, value) {
+            selectedOptions[productId].type = type;
+            if (type === 'volume') {
+                selectedOptions[productId].volume = value;
+            } else {
+                selectedOptions[productId].set = value;
+            }
+
+            displayProducts();
+        }
+
+        // Добавление товара в корзину
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const options = selectedOptions[productId];
+            const price = getCurrentPrice(productId);
+
+            let itemKey, itemDescription;
+
+            if (options.type === 'volume') {
+                itemKey = `${productId}-volume-${options.volume}`;
+                itemDescription = `${options.volume}мл`;
+            } else {
+                itemKey = `${productId}-set-${options.set}`;
+                itemDescription = product.sets[options.set].description;
+            }
+
+            const existingItem = cart.find(item => item.key === itemKey);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    key: itemKey,
+                    id: productId,
+                    name: product.name,
+                    brand: product.brand,
+                    emoji: product.emoji,
+                    description: itemDescription,
+                    type: options.type,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            updateCartCount();
+
+            // Анимация добавления
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✓ Добавлено!';
+            button.style.background = '#4CAF50';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+            }, 1000);
+        }
+
+        // Обновление счетчика корзины
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Открытие корзины
+        function openCart() {
+            displayCartItems();
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        // Закрытие корзины
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // Отображение товаров в корзине
+        function displayCartItems() {
+            const cartItems = document.getElementById('cartItems');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Корзина пуста</div>';
+                document.getElementById('totalPrice').textContent = '0';
+                return;
+            }
+
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.emoji} ${item.name}</div>
+                        <div class="cart-item-details">${item.brand} • ${item.description}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString()} ₽</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="changeQuantity('${item.key}', -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn" onclick="changeQuantity('${item.key}', 1)">+</button>
+                        <button class="remove-btn" onclick="removeFromCart('${item.key}')">Удалить</button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            document.getElementById('totalPrice').textContent = total.toLocaleString();
+        }
+
+        // Изменение количества товара
+        function changeQuantity(itemKey, change) {
+            const item = cart.find(item => item.key === itemKey);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemKey);
+                } else {
+                    displayCartItems();
+                    updateCartCount();
+                }
+            }
+        }
+
+        // Удаление товара из корзины
+        function removeFromCart(itemKey) {
+            cart = cart.filter(item => item.key !== itemKey);
+            displayCartItems();
+            updateCartCount();
+        }
+
+        // Поделиться корзиной
+        function shareCart() {
+            if (cart.length === 0) {
+                alert('Корзина пуста!');
+                return;
+            }
+
+            let message = '🛒 МОЙ ЗАКАЗ:\n\n';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `${item.emoji} ${item.name}\n`;
+                message += `   Бренд: ${item.brand}\n`;
+                message += `   Вариант: ${item.description}\n`;
+                message += `   Количество: ${item.quantity} шт.\n`;
+                message += `   Цена за единицу: ${item.price.toLocaleString()} ₽\n`;
+                message += `   Сумма: ${itemTotal.toLocaleString()} ₽\n\n`;
+            });
+
+            message += `💰 ИТОГО: ${total.toLocaleString()} ₽`;
+
+            // Попробуем использовать Web Share API
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Мой заказ парфюмерии',
+                    text: message
+                }).catch(err => {
+                    // Если Web Share API не сработал, копируем в буфер
+                    copyToClipboard(message);
+                });
+            } else {
+                // Копируем в буфер обмена
+                copyToClipboard(message);
+            }
+        }
+
+        // Копирование в буфер обмена
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Заказ скопирован в буфер обмена!\nМожете отправить его продавцу через любой мессенджер.');
+            }).catch(() => {
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('✅ Заказ скопирован в буфер обмена!\nМожете отправить его продавцу через любой мессенджер.');
+            });
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                closeCart();
+            }
+        }
+
+        // Инициализация
+        displayProducts();
+    </script>
+</body>
+</html>
