@@ -34,6 +34,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
@@ -43,7 +45,13 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .cart-icon {
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .cart-icon, .custom-set-btn {
             position: relative;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
@@ -56,7 +64,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .cart-icon:hover {
+        .cart-icon:hover, .custom-set-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
         }
@@ -79,7 +87,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
@@ -92,6 +100,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .product-card:hover {
@@ -128,109 +137,18 @@
 
         .product-description {
             color: #777;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.4;
         }
 
-        .product-options {
-            margin-bottom: 20px;
-        }
-
-        .option-type {
+        .product-price-range {
+            font-size: 16px;
+            font-weight: bold;
+            color: #764ba2;
             margin-bottom: 15px;
         }
 
-        .option-label {
-            display: block;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .volume-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .volume-option {
-            padding: 8px 15px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-align: center;
-            min-width: 70px;
-        }
-
-        .volume-option:hover {
-            border-color: #764ba2;
-            background: #f8f9ff;
-        }
-
-        .volume-option.selected {
-            border-color: #764ba2;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .volume-price {
-            display: block;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 3px;
-        }
-
-        .sets-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .set-option {
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 15px;
-            background: white;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .set-option:hover {
-            border-color: #764ba2;
-            background: #f8f9ff;
-        }
-
-        .set-option.selected {
-            border-color: #764ba2;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .set-description {
-            display: block;
-            font-size: 11px;
-            margin-bottom: 5px;
-        }
-
-        .set-price {
-            display: block;
-            font-weight: bold;
-        }
-
-        .current-price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #764ba2;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .add-to-cart {
+        .view-details-btn {
             width: 100%;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
@@ -244,14 +162,9 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .add-to-cart:hover:not(:disabled) {
+        .view-details-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .add-to-cart:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
         }
 
         .modal {
@@ -268,12 +181,12 @@
 
         .modal-content {
             background: white;
-            margin: 5% auto;
+            margin: 2% auto;
             padding: 0;
             border-radius: 20px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 80vh;
+            width: 95%;
+            max-width: 800px;
+            max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
@@ -299,6 +212,212 @@
 
         .modal-body {
             padding: 30px;
+        }
+
+        .product-detail-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .detail-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .detail-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .note-category {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .note-category-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .note-category-content {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .product-options {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+        }
+
+        .option-type {
+            margin-bottom: 20px;
+        }
+
+        .option-label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .volume-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .volume-option {
+            padding: 12px 18px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .volume-option:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+
+        .volume-option.selected {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .volume-price {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .sets-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .set-option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .set-option:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+
+        .set-option.selected {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .set-description {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .set-price {
+            display: block;
+            font-weight: bold;
+        }
+
+        .current-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-to-cart:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-set-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .custom-set-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .custom-item {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .custom-item:hover {
+            border-color: #764ba2;
+        }
+
+        .custom-item.selected {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
         }
 
         .cart-item {
@@ -404,6 +523,31 @@
             padding: 40px 0;
         }
 
+        .custom-set-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .custom-set-controls select, .custom-set-controls input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .custom-set-controls button {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -411,7 +555,6 @@
 
             header {
                 flex-direction: column;
-                gap: 15px;
                 text-align: center;
             }
 
@@ -420,8 +563,17 @@
                 gap: 20px;
             }
 
-            .sets-options {
+            .modal-content {
+                width: 98%;
+                margin: 1% auto;
+            }
+
+            .notes-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .volume-options {
+                justify-content: center;
             }
         }
     </style>
@@ -430,14 +582,65 @@
     <div class="container">
         <header>
             <div class="logo">✨ Parfume Boutique</div>
-            <button class="cart-icon" onclick="openCart()">
-                🛒 Корзина
-                <span class="cart-count" id="cartCount">0</span>
-            </button>
+            <div class="header-buttons">
+                <button class="custom-set-btn" onclick="openCustomSetModal()">
+                    🎨 Создать сет
+                </button>
+                <button class="cart-icon" onclick="openCart()">
+                    🛒 Корзина
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
         </header>
 
         <div class="products-grid" id="productsGrid">
             <!-- Товары будут добавлены через JavaScript -->
+        </div>
+    </div>
+
+    <!-- Модальное окно товара -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="productModalTitle">Детали товара</h2>
+                <button class="close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="productModalBody">
+                <!-- Содержимое будет добавлено через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно создания кастомного сета -->
+    <div id="customSetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎨 Создать свой сет</h2>
+                <button class="close" onclick="closeCustomSetModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-set-section">
+                    <div class="detail-title">Выберите парфюмы для сета:</div>
+                    <div class="custom-set-grid" id="customSetGrid">
+                        <!-- Будет заполнено через JavaScript -->
+                    </div>
+                    <div class="custom-set-controls">
+                        <label>Объем каждого флакона:</label>
+                        <select id="customSetVolume">
+                            <option value="2">2мл</option>
+                            <option value="5">5мл</option>
+                            <option value="10">10мл</option>
+                        </select>
+                        <label>Количество флаконов:</label>
+                        <input type="number" id="customSetCount" min="2" max="10" value="3" style="width: 70px;">
+                        <button onclick="calculateCustomSet()">Рассчитать</button>
+                    </div>
+                    <div id="customSetPrice" class="current-price" style="margin-top: 15px;"></div>
+                    <button class="add-to-cart" id="addCustomSetBtn" onclick="addCustomSetToCart()" style="display: none;">
+                        Добавить сет в корзину
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -459,14 +662,23 @@
     </div>
 
     <script>
-        // Данные товаров с объемами и сетами
+        // Расширенные данные товаров
         const products = [
             {
                 id: 1,
                 name: "Chanel No. 5",
                 brand: "Chanel",
                 description: "Легендарный аромат с нотами иланг-иланга, розы и сандала",
+                fullDescription: "Chanel No. 5 - это воплощение элегантности и роскоши. Созданный в 1921 году Эрнестом Бо по заказу Коко Шанель, этот аромат стал символом женственности и стиля.",
                 emoji: "🌹",
+                notes: {
+                    top: "Альдегиды, Нероли, Иланг-иланг",
+                    heart: "Роза, Ландыш, Ирис, Жасмин",
+                    base: "Сандаловое дерево, Ветивер, Ваниль, Амбра"
+                },
+                season: "Универсальный",
+                longevity: "8-10 часов",
+                sillage: "Сильный",
                 volumes: {
                     2: 850,
                     5: 1800,
@@ -485,7 +697,16 @@
                 name: "Dior Sauvage",
                 brand: "Christian Dior",
                 description: "Свежий мужской аромат с нотами бергамота и перца",
+                fullDescription: "Sauvage - это дикая природа под палящим солнцем. Аромат вдохновлен широкими пространствами пустыни в сумерках.",
                 emoji: "🌿",
+                notes: {
+                    top: "Бергамот, Розовый перец",
+                    heart: "Сычуаньский перец, Лаванда, Звездчатый анис",
+                    base: "Амброксан, Кедр, Лабданум"
+                },
+                season: "Весна-лето",
+                longevity: "6-8 часов",
+                sillage: "Умеренный",
                 volumes: {
                     2: 750,
                     5: 1600,
@@ -504,7 +725,16 @@
                 name: "Tom Ford Black Orchid",
                 brand: "Tom Ford",
                 description: "Роскошный унисекс аромат с черной орхидеей и ванилью",
+                fullDescription: "Black Orchid - это загадочный и соблазнительный аромат, который сочетает темную роскошь с современной элегантностью.",
                 emoji: "🖤",
+                notes: {
+                    top: "Трюфель, Бергамот, Черная смородина",
+                    heart: "Черная орхидея, Фруктовые ноты, Иланг-иланг",
+                    base: "Пачули, Ваниль, Бальзам, Сандал"
+                },
+                season: "Осень-зима",
+                longevity: "10-12 часов",
+                sillage: "Очень сильный",
                 volumes: {
                     2: 950,
                     5: 2100,
@@ -523,7 +753,16 @@
                 name: "Versace Bright Crystal",
                 brand: "Versace",
                 description: "Сияющий женский аромат с нотами граната и пиона",
+                fullDescription: "Bright Crystal воплощает в себе современную женственность - яркую, чувственную и кристально чистую.",
                 emoji: "💎",
+                notes: {
+                    top: "Гранат, Юзу, Ледяные аккорды",
+                    heart: "Пион, Магнолия, Цветы лотоса",
+                    base: "Мускус, Древесина, Амбра"
+                },
+                season: "Весна-лето",
+                longevity: "4-6 часов",
+                sillage: "Легкий",
                 volumes: {
                     2: 550,
                     5: 1200,
@@ -542,7 +781,16 @@
                 name: "Giorgio Armani Acqua di Gio",
                 brand: "Giorgio Armani",
                 description: "Свежий морской аромат с нотами бергамота и розмарина",
+                fullDescription: "Acqua di Gio - это свежесть морского бриза и тепло средиземноморского солнца, воплощенные в элегантном флаконе.",
                 emoji: "🌊",
+                notes: {
+                    top: "Бергамот, Нероли, Зеленые мандарины",
+                    heart: "Морские ноты, Жасмин, Розмарин",
+                    base: "Белый мускус, Кедр, Пачули"
+                },
+                season: "Весна-лето",
+                longevity: "5-7 часов",
+                sillage: "Умеренный",
                 volumes: {
                     2: 680,
                     5: 1450,
@@ -561,7 +809,16 @@
                 name: "Yves Saint Laurent Black Opium",
                 brand: "Yves Saint Laurent",
                 description: "Соблазнительный аромат с кофе, ванилью и жасмином",
+                fullDescription: "Black Opium - это аромат для современной женщины, которая живет по своим правилам. Энергичный, соблазнительный и незабываемый.",
                 emoji: "☕",
+                notes: {
+                    top: "Розовый перец, Апельсиновый цвет, Груша",
+                    heart: "Кофе, Жасмин, Горький миндаль",
+                    base: "Ваниль, Пачули, Кедр"
+                },
+                season: "Осень-зима",
+                longevity: "8-10 часов",
+                sillage: "Сильный",
                 volumes: {
                     2: 800,
                     5: 1750,
@@ -580,7 +837,16 @@
                 name: "Dolce & Gabbana Light Blue",
                 brand: "Dolce & Gabbana",
                 description: "Средиземноморский аромат с лимоном и зеленым яблоком",
+                fullDescription: "Light Blue переносит вас в летний день на Сицилии - солнце, море и беззаботность итальянского лета.",
                 emoji: "🍋",
+                notes: {
+                    top: "Лимон, Зеленое яблоко, Колокольчик",
+                    heart: "Белая роза, Бамбук, Жасмин",
+                    base: "Кедр, Амбра, Мускус"
+                },
+                season: "Весна-лето",
+                longevity: "4-6 часов",
+                sillage: "Легкий",
                 volumes: {
                     2: 620,
                     5: 1350,
@@ -599,7 +865,16 @@
                 name: "Hermès Terre d'Hermès",
                 brand: "Hermès",
                 description: "Земляной мужской аромат с грейпфрутом и ветивером",
+                fullDescription: "Terre d'Hermès - это рассказ о связи человека и земли, его скромное и гармоничное диалог с природой и стихиями.",
                 emoji: "🌍",
+                notes: {
+                    top: "Грейпфрут, Апельсин",
+                    heart: "Герань, Роза, Кремень",
+                    base: "Ветивер, Кедр, Бензоин"
+                },
+                season: "Универсальный",
+                longevity: "8-10 часов",
+                sillage: "Умеренный",
                 volumes: {
                     2: 900,
                     5: 1950,
@@ -617,91 +892,173 @@
 
         let cart = [];
         let selectedOptions = {};
+        let customSetSelection = [];
 
-        // Отображение товаров
+        // Отображение товаров в каталоге
         function displayProducts() {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
 
             products.forEach(product => {
-                // Инициализируем выбранные опции для каждого товара
-                if (!selectedOptions[product.id]) {
-                    selectedOptions[product.id] = {
-                        type: 'volume', // 'volume' или 'set'
-                        volume: Object.keys(product.volumes)[0],
-                        set: Object.keys(product.sets)[0]
-                    };
-                }
+                const minPrice = Math.min(...Object.values(product.volumes));
+                const maxPrice = Math.max(...Object.values(product.volumes));
 
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
-
-                // Создаем опции объемов
-                let volumeOptionsHtml = '';
-                Object.entries(product.volumes).forEach(([volume, price]) => {
-                    const isSelected = selectedOptions[product.id].type === 'volume' &&
-                                     selectedOptions[product.id].volume === volume;
-                    volumeOptionsHtml += `
-                        <div class="volume-option ${isSelected ? 'selected' : ''}"
-                             onclick="selectOption(${product.id}, 'volume', '${volume}')">
-                            ${volume}мл
-                            <span class="volume-price">${price.toLocaleString()}₽</span>
-                        </div>
-                    `;
-                });
-
-                // Создаем опции сетов
-                let setOptionsHtml = '';
-                Object.entries(product.sets).forEach(([setKey, setData]) => {
-                    const isSelected = selectedOptions[product.id].type === 'set' &&
-                                     selectedOptions[product.id].set === setKey;
-                    setOptionsHtml += `
-                        <div class="set-option ${isSelected ? 'selected' : ''}"
-                             onclick="selectOption(${product.id}, 'set', '${setKey}')">
-                            <span class="set-description">${setData.description}</span>
-                            <span class="set-price">${setData.price.toLocaleString()}₽</span>
-                        </div>
-                    `;
-                });
-
-                // Определяем текущую цену
-                const currentPrice = getCurrentPrice(product.id);
+                productCard.onclick = () => openProductModal(product.id);
 
                 productCard.innerHTML = `
                     <div class="product-image">${product.emoji}</div>
                     <div class="product-name">${product.name}</div>
                     <div class="product-brand">${product.brand}</div>
                     <div class="product-description">${product.description}</div>
-
-                    <div class="product-options">
-                        <div class="option-type">
-                            <label class="option-label">Выберите объем:</label>
-                            <div class="volume-options">
-                                ${volumeOptionsHtml}
-                            </div>
-                        </div>
-
-                        <div class="option-type">
-                            <label class="option-label">Или выберите сет:</label>
-                            <div class="sets-options">
-                                ${setOptionsHtml}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="current-price">${currentPrice.toLocaleString()} ₽</div>
-                    <button class="add-to-cart" onclick="addToCart(${product.id})">
-                        Добавить в корзину
+                    <div class="product-price-range">от ${minPrice.toLocaleString()} до ${maxPrice.toLocaleString()} ₽</div>
+                    <button class="view-details-btn" onclick="event.stopPropagation(); openProductModal(${product.id})">
+                        Подробнее и заказать
                     </button>
                 `;
                 grid.appendChild(productCard);
             });
         }
 
+        // Открытие модального окна товара
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Инициализируем выбранные опции для товара
+            if (!selectedOptions[productId]) {
+                selectedOptions[productId] = {
+                    type: 'volume',
+                    volume: Object.keys(product.volumes)[0],
+                    set: Object.keys(product.sets)[0]
+                };
+            }
+
+            document.getElementById('productModalTitle').innerHTML = `${product.emoji} ${product.name}`;
+
+            const modalBody = document.getElementById('productModalBody');
+            modalBody.innerHTML = `
+                <div class="product-detail-image">${product.emoji}</div>
+
+                <div class="detail-section">
+                    <div class="detail-title">О парфюме</div>
+                    <div class="detail-content">
+                        <strong>${product.brand}</strong><br>
+                        ${product.fullDescription}
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title">Пирамида аромата</div>
+                    <div class="notes-grid">
+                        <div class="note-category">
+                            <div class="note-category-title">Верхние ноты</div>
+                            <div class="note-category-content">${product.notes.top}</div>
+                        </div>
+                        <div class="note-category">
+                            <div class="note-category-title">Ноты сердца</div>
+                            <div class="note-category-content">${product.notes.heart}</div>
+                        </div>
+                        <div class="note-category">
+                            <div class="note-category-title">Базовые ноты</div>
+                            <div class="note-category-content">${product.notes.base}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-title">Характеристики</div>
+                    <div class="detail-content">
+                        <strong>Сезон:</strong> ${product.season}<br>
+                        <strong>Стойкость:</strong> ${product.longevity}<br>
+                        <strong>Шлейф:</strong> ${product.sillage}
+                    </div>
+                </div>
+
+                <div class="product-options">
+                    <div class="option-type">
+                        <label class="option-label">Выберите объем:</label>
+                        <div class="volume-options" id="volumeOptions-${productId}">
+                            ${generateVolumeOptions(product, productId)}
+                        </div>
+                    </div>
+
+                    <div class="option-type">
+                        <label class="option-label">Или выберите готовый сет:</label>
+                        <div class="sets-options" id="setOptions-${productId}">
+                            ${generateSetOptions(product, productId)}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="current-price" id="currentPrice-${productId}">${getCurrentPrice(productId).toLocaleString()} ₽</div>
+                <button class="add-to-cart" onclick="addToCartFromModal(${productId})">
+                    Добавить в корзину
+                </button>
+            `;
+
+            document.getElementById('productModal').style.display = 'block';
+        }
+
+        // Генерация опций объемов
+        function generateVolumeOptions(product, productId) {
+            let html = '';
+            Object.entries(product.volumes).forEach(([volume, price]) => {
+                const isSelected = selectedOptions[productId] &&
+                                 selectedOptions[productId].type === 'volume' &&
+                                 selectedOptions[productId].volume === volume;
+                html += `
+                    <div class="volume-option ${isSelected ? 'selected' : ''}"
+                         onclick="selectOptionInModal(${productId}, 'volume', '${volume}')">
+                        ${volume}мл
+                        <span class="volume-price">${price.toLocaleString()}₽</span>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
+        // Генерация опций сетов
+        function generateSetOptions(product, productId) {
+            let html = '';
+            Object.entries(product.sets).forEach(([setKey, setData]) => {
+                const isSelected = selectedOptions[productId] &&
+                                 selectedOptions[productId].type === 'set' &&
+                                 selectedOptions[productId].set === setKey;
+                html += `
+                    <div class="set-option ${isSelected ? 'selected' : ''}"
+                         onclick="selectOptionInModal(${productId}, 'set', '${setKey}')">
+                        <span class="set-description">${setData.description}</span>
+                        <span class="set-price">${setData.price.toLocaleString()}₽</span>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
+        // Выбор опции в модальном окне
+        function selectOptionInModal(productId, type, value) {
+            selectedOptions[productId].type = type;
+            if (type === 'volume') {
+                selectedOptions[productId].volume = value;
+            } else {
+                selectedOptions[productId].set = value;
+            }
+
+            // Обновляем UI
+            const product = products.find(p => p.id === productId);
+            document.getElementById(`volumeOptions-${productId}`).innerHTML = generateVolumeOptions(product, productId);
+            document.getElementById(`setOptions-${productId}`).innerHTML = generateSetOptions(product, productId);
+            document.getElementById(`currentPrice-${productId}`).textContent = getCurrentPrice(productId).toLocaleString() + ' ₽';
+        }
+
         // Получить текущую цену товара
         function getCurrentPrice(productId) {
             const product = products.find(p => p.id === productId);
             const options = selectedOptions[productId];
+
+            if (!options) return Object.values(product.volumes)[0];
 
             if (options.type === 'volume') {
                 return product.volumes[options.volume];
@@ -710,16 +1067,142 @@
             }
         }
 
-        // Выбор опции (объем или сет)
-        function selectOption(productId, type, value) {
-            selectedOptions[productId].type = type;
-            if (type === 'volume') {
-                selectedOptions[productId].volume = value;
+        // Добавление в корзину из модального окна
+        function addToCartFromModal(productId) {
+            addToCart(productId);
+            closeProductModal();
+        }
+
+        // Закрытие модального окна товара
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        // Открытие модального окна создания кастомного сета
+        function openCustomSetModal() {
+            generateCustomSetGrid();
+            document.getElementById('customSetModal').style.display = 'block';
+        }
+
+        // Закрытие модального окна кастомного сета
+        function closeCustomSetModal() {
+            document.getElementById('customSetModal').style.display = 'none';
+            customSetSelection = [];
+        }
+
+        // Генерация сетки для кастомного сета
+        function generateCustomSetGrid() {
+            const grid = document.getElementById('customSetGrid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'custom-item';
+                item.onclick = () => toggleCustomSetItem(product.id);
+
+                item.innerHTML = `
+                    <div style="font-size: 32px; margin-bottom: 10px;">${product.emoji}</div>
+                    <div style="font-weight: bold; font-size: 14px;">${product.name}</div>
+                    <div style="font-size: 12px; color: #666;">${product.brand}</div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // Переключение выбора товара в кастомном сете
+        function toggleCustomSetItem(productId) {
+            const index = customSetSelection.indexOf(productId);
+            if (index > -1) {
+                customSetSelection.splice(index, 1);
             } else {
-                selectedOptions[productId].set = value;
+                customSetSelection.push(productId);
             }
 
-            displayProducts();
+            // Обновляем визуальное отображение
+            const items = document.querySelectorAll('.custom-item');
+            items.forEach((item, idx) => {
+                if (customSetSelection.includes(products[idx].id)) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+
+            calculateCustomSet();
+        }
+
+        // Расчет стоимости кастомного сета
+        function calculateCustomSet() {
+            const volume = document.getElementById('customSetVolume').value;
+            const count = document.getElementById('customSetCount').value;
+            const priceDiv = document.getElementById('customSetPrice');
+            const addBtn = document.getElementById('addCustomSetBtn');
+
+            if (customSetSelection.length === 0) {
+                priceDiv.textContent = 'Выберите парфюмы';
+                addBtn.style.display = 'none';
+                return;
+            }
+
+            if (customSetSelection.length > parseInt(count)) {
+                priceDiv.textContent = `Выбрано слишком много парфюмов (${customSetSelection.length}), максимум ${count}`;
+                addBtn.style.display = 'none';
+                return;
+            }
+
+            let totalPrice = 0;
+            customSetSelection.forEach(productId => {
+                const product = products.find(p => p.id === productId);
+                totalPrice += product.volumes[volume];
+            });
+
+            // Если выбрано меньше флаконов чем нужно, добавляем рандомные
+            if (customSetSelection.length < parseInt(count)) {
+                const remaining = parseInt(count) - customSetSelection.length;
+                const avgPrice = totalPrice / customSetSelection.length;
+                totalPrice += avgPrice * remaining;
+                priceDiv.textContent = `${totalPrice.toLocaleString()} ₽ (${customSetSelection.length} выбранных + ${remaining} случайных)`;
+            } else {
+                priceDiv.textContent = `${totalPrice.toLocaleString()} ₽`;
+            }
+
+            addBtn.style.display = 'block';
+        }
+
+        // Добавление кастомного сета в корзину
+        function addCustomSetToCart() {
+            const volume = document.getElementById('customSetVolume').value;
+            const count = document.getElementById('customSetCount').value;
+
+            if (customSetSelection.length === 0) return;
+
+            const selectedProducts = customSetSelection.map(id => products.find(p => p.id === id));
+            let totalPrice = 0;
+
+            selectedProducts.forEach(product => {
+                totalPrice += product.volumes[volume];
+            });
+
+            const itemKey = `custom-set-${Date.now()}`;
+            const productNames = selectedProducts.map(p => p.name).join(', ');
+            const emojis = selectedProducts.map(p => p.emoji).join('');
+
+            cart.push({
+                key: itemKey,
+                id: 'custom-set',
+                name: `Кастомный сет (${count} шт.)`,
+                brand: 'Микс брендов',
+                emoji: emojis,
+                description: `${volume}мл каждый: ${productNames}`,
+                type: 'custom-set',
+                price: totalPrice,
+                quantity: 1
+            });
+
+            updateCartCount();
+            closeCustomSetModal();
+
+            alert('✅ Кастомный сет добавлен в корзину!');
         }
 
         // Добавление товара в корзину
@@ -761,12 +1244,12 @@
             // Анимация добавления
             const button = event.target;
             const originalText = button.textContent;
-            button.textContent = '✓ Добавлено!';
+            button.textContent = '✅ Добавлено!';
             button.style.background = '#4CAF50';
             setTimeout(() => {
                 button.textContent = originalText;
                 button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
-            }, 1000);
+            }, 1500);
         }
 
         // Обновление счетчика корзины
@@ -852,21 +1335,23 @@
                 return;
             }
 
-            let message = '🛒 МОЙ ЗАКАЗ:\n\n';
+            let message = '🛒 МОЙ ЗАКАЗ ПАРФЮМЕРИИ:\n\n';
             let total = 0;
 
-            cart.forEach(item => {
+            cart.forEach((item, index) => {
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
-                message += `${item.emoji} ${item.name}\n`;
-                message += `   Бренд: ${item.brand}\n`;
-                message += `   Вариант: ${item.description}\n`;
-                message += `   Количество: ${item.quantity} шт.\n`;
-                message += `   Цена за единицу: ${item.price.toLocaleString()} ₽\n`;
-                message += `   Сумма: ${itemTotal.toLocaleString()} ₽\n\n`;
+
+                message += `${index + 1}. ${item.emoji} ${item.name}\n`;
+                message += `   └ ${item.brand}\n`;
+                message += `   └ ${item.description}\n`;
+                message += `   └ Количество: ${item.quantity} шт.\n`;
+                message += `   └ Цена: ${item.price.toLocaleString()} ₽ за шт.\n`;
+                message += `   └ Сумма: ${itemTotal.toLocaleString()} ₽\n\n`;
             });
 
-            message += `💰 ИТОГО: ${total.toLocaleString()} ₽`;
+            message += `💰 ОБЩАЯ СУММА: ${total.toLocaleString()} ₽\n\n`;
+            message += `📞 Жду подтверждения заказа!`;
 
             // Попробуем использовать Web Share API
             if (navigator.share) {
@@ -874,11 +1359,9 @@
                     title: 'Мой заказ парфюмерии',
                     text: message
                 }).catch(err => {
-                    // Если Web Share API не сработал, копируем в буфер
                     copyToClipboard(message);
                 });
             } else {
-                // Копируем в буфер обмена
                 copyToClipboard(message);
             }
         }
@@ -899,12 +1382,15 @@
             });
         }
 
-        // Закрытие модального окна при клике вне его
+        // Закрытие модальных окон при клике вне их
         window.onclick = function(event) {
-            const modal = document.getElementById('cartModal');
-            if (event.target === modal) {
-                closeCart();
-            }
+            const modals = ['cartModal', 'productModal', 'customSetModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         }
 
         // Инициализация
